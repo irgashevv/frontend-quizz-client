@@ -10,7 +10,7 @@
           alt="Workflow"
         />
         <h2 class="mt-6 text-center text-3xl font-extrabold text-gray-900">
-          Sign in to your account
+          Регистрация
         </h2>
       </div>
 
@@ -26,7 +26,7 @@
                   for="user_name"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  User name
+                  Псевдоним
                 </label>
                 <input
                   type="text"
@@ -42,7 +42,7 @@
                   for="name"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  First name
+                  Имя
                 </label>
                 <input
                   type="text"
@@ -59,7 +59,7 @@
                   for="surname"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Surname
+                  Фамилия
                 </label>
                 <input
                   type="text"
@@ -76,7 +76,7 @@
                   for="email_address"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Email address
+                  Электронная почта
                 </label>
                 <input
                   type="text"
@@ -92,7 +92,7 @@
                   for="password"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Password
+                  Пароль
                 </label>
                 <input
                   type="password"
@@ -108,7 +108,7 @@
                   for="password_confirmation"
                   class="block text-sm font-medium text-gray-700"
                 >
-                  Confirm password
+                  Подтверждение пароля
                 </label>
                 <input
                   type="password"
@@ -131,7 +131,7 @@
                 class="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
               />
               <label for="remember_me" class="ml-2 block text-sm text-gray-900">
-                Remember me
+                Запомнить меня
               </label>
             </div>
 
@@ -140,7 +140,7 @@
                 href="#"
                 class="font-medium text-indigo-600 hover:text-indigo-500"
               >
-                Forgot your password?
+                Забыли пароль?
               </a>
             </div>
           </div>
@@ -166,7 +166,7 @@
                   />
                 </svg>
               </span>
-              Sign in
+              Зарегистрироваться
             </button>
           </div>
         </form>

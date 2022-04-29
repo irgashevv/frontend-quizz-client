@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseApi = axios.create({
-  baseURL: "http://api.quizz.tj/api",
+  baseURL: "http://service-quizz.tj/api",
 });
 
 export default baseApi;
