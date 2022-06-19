@@ -9,3 +9,4 @@ export const api = axios.create({
 export const getTopics = () => api.get('');
 export const getTopic = topicId => api.get(`/${topicId}`);
 export const submitTopic = (topicId, params) => api.post(`/${topicId}`, params);
+export const signUp = params => api.post('/register', params);

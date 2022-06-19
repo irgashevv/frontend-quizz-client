@@ -2,23 +2,29 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 const routes = [
   {
+    path: '/',
+    component: () => import('@/layouts/MainLayout'),
+    children: [
+      {
+        path: '',
+        name: 'topics',
+        component: () => import('@/views/TopicsIndex'),
+        meta: { title: 'Топики' },
+      },
+      {
+        path: '/:id',
+        name: 'topic-detail',
+        component: () => import('@/views/TopicDetail'),
+        props: true,
+        meta: { title: 'Топики' },
+      },
+    ],
+  },
+  {
     path: '/sign-up',
     name: 'sign-up',
     component: () => import('@/views/SignUp'),
     meta: { title: 'Регистрация' },
-  },
-  {
-    path: '/',
-    name: 'topics',
-    component: () => import('@/views/TopicsIndex'),
-    meta: { title: 'Топики' },
-  },
-  {
-    path: '/:id',
-    name: 'topic-detail',
-    component: () => import('@/views/TopicDetail'),
-    props: true,
-    meta: { title: 'Топики' },
   },
 ];
 
@@ -28,10 +34,16 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem('auth-token');
   document.title = to.meta.title;
   if (!token) {
-    next({ name: 'sign-up' });
+    if (to.name !== 'sign-up') {
+      next({
+        name: 'sign-up',
+      });
+    } else {
+      next();
+    }
   } else {
     next();
   }
