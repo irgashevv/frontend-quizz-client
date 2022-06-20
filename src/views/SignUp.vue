@@ -63,8 +63,9 @@
       alert('Пароли нге совпадают');
     }
     loading.value = true;
-    signUp()
-      .then(() => {
+    signUp(userData.value)
+      .then(response => {
+        localStorage.setItem('auth-token', response.data.token);
         router.push('/');
       })
       .finally(() => {
