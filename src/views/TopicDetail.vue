@@ -18,7 +18,7 @@
     </div>
 
     <div v-else class="max-w-lg mx-auto">
-      <h1 class="font-bold text-5xl text-center text-indigo-700">Simple Quiz</h1>
+      <h1 class="font-bold text-5xl text-center text-indigo-700">Прохождение теста</h1>
       <div class="bg-white p-12 rounded-lg shadow-lg w-full mt-8">
         <div v-if="questionIndex < count">
           <div>
@@ -31,9 +31,9 @@
             :for="index"
             class="block mt-4 border border-gray-300 rounded-lg py-2 px-6 text-lg"
             :class="{
-              'hover:bg-gray-100 cursor-pointer': selectedAnswer === '',
-              'bg-green-200': answer.is_right && selectedAnswer !== '',
-              'bg-red-200': selectedAnswer === answer.id && !answer.is_right,
+              'hover:bg-gray-100 cursor-pointer': selectedAnswers.length !== rightAnswersCount,
+              'bg-green-200': answer.is_right && selectedAnswers.includes(answer.id),
+              'bg-red-200': !answer.is_right && selectedAnswers.includes(answer.id),
             }"
           >
             <input
@@ -42,7 +42,7 @@
               class="hidden"
               :value="answer.id"
               @change="answered($event)"
-              :disabled="selectedAnswer != ''"
+              :disabled="selectedAnswers.length === rightAnswersCount"
             />
             {{ answer.title }}
           </label>
@@ -52,25 +52,25 @@
               v-show="questionIndex < count - 1"
               class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
             >
-              Next &gt;
+              Следующий &gt;
             </button>
             <button
               @click="finishQuestion"
               class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
             >
-              Finish
+              Закончить
             </button>
           </div>
         </div>
         <div v-else>
-          <h2 class="text-bold text-3xl">Results</h2>
+          <h2 class="text-bold text-3xl">Результат</h2>
           <div class="flex justify-start space-x-4 mt-6">
             <p>
-              Correct Answers:
+              Правильных ответов:
               <span class="text-2xl text-green-700 font-bold">{{ correctAnswers }}</span>
             </p>
             <p>
-              Wrong Answers:
+              Неправильных ответов:
               <span class="text-2xl text-red-700 font-bold">{{ wrongAnswers }}</span>
             </p>
           </div>
@@ -79,7 +79,7 @@
               @click="resetQuiz"
               class="float-right bg-indigo-600 text-white text-sm font-bold tracking-wide rounded-full px-5 py-2"
             >
-              Play again
+              Начать сначало
             </button>
           </div>
         </div>
@@ -100,11 +100,13 @@
   const questionIndex = ref(0);
   const wrongAnswers = ref(0);
   const correctAnswers = ref(0);
-  const selectedAnswer = ref('');
+  const selectedAnswers = ref([]);
   const answeredQuestions = ref([]);
-  // const router = useRouter();
 
   const count = computed(() => topic.value.length);
+  const rightAnswersCount = computed(
+    () => topic.value[questionIndex.value].answers.filter(answer => answer.is_right).length
+  );
 
   const getTopicHandler = () => {
     getTopic(route.params.id)
@@ -128,27 +130,32 @@
   };
 
   function answered(e) {
-    selectedAnswer.value = +e.target.value;
-    const correct = topic.value[questionIndex.value].answers.find(item => item.is_right);
-    if (selectedAnswer.value === correct?.id) {
-      correctAnswers.value++;
-    } else {
-      wrongAnswers.value++;
+    selectedAnswers.value = [...selectedAnswers.value, +e.target.value];
+    if (selectedAnswers.value.length === rightAnswersCount.value) {
+      answeredQuestions.value.push({ ...topic.value[questionIndex.value], answers: selectedAnswers.value });
+      if (
+        selectedAnswers.value.every(
+          item => topic.value[questionIndex.value].answers.find(answer => answer.id === item).is_right
+        )
+      ) {
+        correctAnswers.value++;
+      } else {
+        wrongAnswers.value++;
+      }
     }
-    answeredQuestions.value.push({ ...topic.value[questionIndex.value], answer: selectedAnswer.value });
   }
   function nextQuestion() {
     questionIndex.value++;
-    selectedAnswer.value = '';
+    selectedAnswers.value = [];
     document.querySelectorAll('input').forEach(el => (el.checked = false));
   }
+
   function finishQuestion() {
     questionIndex.value = count.value;
     submitTopicHandler();
   }
   function resetQuiz() {
     questionIndex.value = 0;
-    selectedAnswer.value = '';
     correctAnswers.value = 0;
     wrongAnswers.value = 0;
   }
