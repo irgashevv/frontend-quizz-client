@@ -1,13 +1,7 @@
 <template>
   <div class="max-w-screen-xl h-screen px-4 py-16 mx-auto sm:px-6 lg:px-8 flex items-center">
-    <div class="max-w-lg mx-auto">
-      <h1 class="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">Get started today</h1>
-
-      <p class="max-w-md mx-auto mt-4 text-center text-gray-500">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt dolores deleniti inventore quaerat
-        mollitia?
-      </p>
-
+    <div class="max-w-lg w-100 mx-auto">
+      <h1 class="text-2xl font-bold text-center text-indigo-600 sm:text-3xl">Войдите чтобы начать</h1>
       <form action="" class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl" @submit.prevent="login">
         <p class="text-lg font-medium">Вход в аккаунт</p>
 
@@ -19,7 +13,7 @@
               v-model="userData.username"
               type="username"
               id="username"
-              class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+              class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
               placeholder="Enter username"
             />
           </div>
@@ -33,7 +27,7 @@
               v-model="userData.password"
               type="password"
               id="password"
-              class="w-full p-4 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+              class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
               placeholder="Enter password"
             />
           </div>
@@ -45,7 +39,7 @@
 
         <p class="text-sm text-center text-gray-500">
           Нет аккаунта
-          <router-link class="underline" to="/">Регистрация</router-link>
+          <router-link class="underline" to="/sign-up">Регистрация</router-link>
         </p>
       </form>
     </div>

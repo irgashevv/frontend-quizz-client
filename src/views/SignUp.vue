@@ -1,43 +1,91 @@
 <template>
-  <div class="d-flex justify-content-center align-items-center min-vh-100">
-    <form @submit.prevent="signUpHandler">
-      <h4>Регистрация</h4>
-      <div class="mb-3">
-        <label for="username" class="form-label">Псевдоним</label>
-        <input v-model="userData.username" type="text" class="form-control" id="username" placeholder="..." />
+  <div class="flex items-center justify-center min-vh-100">
+    <form
+      action=""
+      class="p-8 mt-6 mb-0 space-y-4 rounded-lg shadow-2xl max-w-md w-100"
+      @submit.prevent="signUpHandler"
+    >
+      <p class="text-lg font-medium">Регистрация</p>
+      <div>
+        <label for="username" class="text-sm font-medium">Псевдоним</label>
+        <div class="relative mt-1">
+          <input
+            v-model="userData.username"
+            type="text"
+            id="username"
+            class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="..."
+          />
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="name" class="form-label">Имя</label>
-        <input v-model="userData.name" type="text" class="form-control" id="name" placeholder="..." />
+      <div>
+        <label for="name" class="text-sm font-medium">Имя</label>
+        <div class="relative mt-1">
+          <input
+            v-model="userData.name"
+            type="text"
+            id="name"
+            class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="..."
+          />
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="surname" class="form-label">Фамилия</label>
-        <input v-model="userData.surname" type="text" class="form-control" id="surname" placeholder="..." />
+      <div>
+        <label for="surname" class="text-sm font-medium">Фамилия</label>
+        <div class="relative mt-1">
+          <input
+            v-model="userData.surname"
+            type="text"
+            id="surname"
+            class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="..."
+          />
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="email" class="form-label">Почта</label>
-        <input v-model="userData.email" type="email" class="form-control" id="email" placeholder="example@mail.ru" />
+      <div>
+        <label for="email" class="text-sm font-medium">Почта</label>
+        <div class="relative mt-1">
+          <input
+            v-model="userData.email"
+            type="text"
+            id="email"
+            class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="..."
+          />
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="password" class="form-label">Пароль</label>
-        <input v-model="userData.password" type="password" class="form-control" id="password" placeholder="******" />
+      <div>
+        <label for="password" class="text-sm font-medium">Пароль</label>
+        <div class="relative mt-1">
+          <input
+            v-model="userData.password"
+            type="text"
+            id="password"
+            class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="..."
+          />
+        </div>
       </div>
-      <div class="mb-3">
-        <label for="passwordConfirmation" class="form-label">Подтверждение пароля</label>
-        <input
-          v-model="userData.password_confirmation"
-          type="password"
-          class="form-control"
-          id="passwordConfirmation"
-          placeholder="******"
-        />
+      <div>
+        <label for="password_confirmation" class="text-sm font-medium">Подтверждение пароля</label>
+        <div class="relative mt-1">
+          <input
+            v-model="userData.password_confirmation"
+            type="text"
+            id="password_confirmation"
+            class="w-full p-3 pr-12 text-sm border-gray-200 rounded-lg shadow-sm"
+            placeholder="..."
+          />
+        </div>
       </div>
-      <button class="btn btn-primary w-100" :disabled="loading">
-        <span class="spinner-border spinner-border-sm" role="status" v-if="loading">
-          <span class="visually-hidden">Loading...</span>
-        </span>
-        Зарегистрироваться
+      <button type="submit" class="block w-full px-5 py-3 text-sm font-medium text-white bg-indigo-600 rounded-lg">
+        Регистрация
       </button>
+
+      <p class="text-sm text-center text-gray-500">
+        Есть аккаунт?
+        <router-link to="/sign-in" class="underline">Вход</router-link>
+      </p>
     </form>
   </div>
 </template>
